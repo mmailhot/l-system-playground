@@ -23,3 +23,8 @@ html, body, .full-container{
 	background:#fafafa;
 	
 }
+
+.button-container{
+	text-align: center;
+	padding:8px;
+}
