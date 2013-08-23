@@ -1,0 +1,79 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>L System Playground</title>
+	<link href="styles/bootstrap.min.css" rel="stylesheet">
+	<link href="styles/bootstrap-theme.min.css" rel="stylesheet">
+	<link href="styles/main.css" rel="stylesheet">
+	<script src="http://code.jquery.com/jquery-1.10.1.min.js"></script>
+	<script src="http://netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.min.js"></script>
+</head>
+<body>
+	<div class="full-container">
+		<canvas id="main-canvas"></canvas>
+		<div class="menu-container">
+			<button type="button" class="btn btn-block" data-toggle="collapse" data-target="#options-menu">Toggle Options</button>
+			<div class="options-menu collapse in" id="options-menu">
+				<h2>L-System Playground</h2>
+				<form id="options">
+					<fieldset>
+						<legend>System Options</legend>
+						
+						<div class="form-group">
+							<label class="control-label" for="system-start">Start</label>
+							<input class="form-control" type="text" name="system-start">
+						</div>
+						
+						<div class="form-group">
+						<label class="control-label" for="system-rules">Rules</label>
+						<textarea class="form-control" rows="5" name="system-rules" placeholder="F -> FF"></textarea>
+						</div>
+						
+						<div class="form-group">
+						<label class="control-label" for="system-iterations">Iterations</label>
+						<input class="form-control" type="text" name="system-iterations">
+						</div>
+
+					</fieldset>
+					<fieldset>
+						<legend>Visual Options</legend>
+
+						<div class="form-group">
+						<label class="control-label" for="visual-length">Forward Length</label>
+						<input class="form-control" type="text" name="visual-length">
+						</div>
+
+						<div class="form-group">
+						<label class="control-label" for="visual-left">Left Turn (Degrees)</label>
+						<input class="form-control" type="text" name="visual-left">
+						</div>
+
+						<div class="form-group">
+						<label class="control-label" for="visual-right">Right Turn (Degrees)</label>
+						<input class="form-control" type="text" name="visual-right">
+						</div>
+
+						<label class="control-label" for="visual-origin">Origin</label>
+						<div class="radio">
+						  <label>
+						    <input type="radio" name="visual-origin" value="bottom-left" checked>
+						    Bottom Left
+						  </label>
+						</div>
+						<div class="radio">
+						  <label>
+						    <input type="radio" name="visual-origin" value="origin">
+						    Centre
+						  </label>
+						</div>
+					</fieldset>
+
+					<button type="button" class="btn btn-block btn-primary" id="generate-button">Generate</button>
+				</form>
+				
+			</div>
+		</div>
+	</div>
+</body>
+</html>
