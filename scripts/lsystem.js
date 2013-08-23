@@ -1,7 +1,5 @@
 (function() {
-  var LSystem;
-
-  LSystem = (function() {
+  this.LSystem = (function() {
     function LSystem(start, rules) {
       var keys, replace;
       this.start = start;

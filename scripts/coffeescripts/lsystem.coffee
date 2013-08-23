@@ -1,4 +1,4 @@
-class LSystem 
+class @LSystem 
 	constructor: (@start, @rules) ->
 		keys = []
 		for replace of @rules
