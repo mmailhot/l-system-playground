@@ -1,3 +1,20 @@
+presets = {
+	"plant":{
+		"system":{
+			"start":"X",
+			"rules":"X -> F-[[X]+X]+F[+FX]-X\nF -> FF",
+			"iterations":"7"
+		},
+		"visual":{
+			"length":"2",
+			"left":"25",
+			"right":"25",
+			"heading":"65",
+			"origin":"bottom-left"
+		}
+	}
+}
+
 generateSystem = (systemOptions, visualOptions) ->
 	try
 		system = new LSystem(systemOptions["start"],systemOptions["rules"])

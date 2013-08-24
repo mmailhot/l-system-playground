@@ -28,3 +28,7 @@ html, body, .full-container{
 	text-align: center;
 	padding:8px;
 }
+
+.dd-button{
+	display: inline-block;
+}
