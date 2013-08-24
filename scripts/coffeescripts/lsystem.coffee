@@ -12,13 +12,14 @@ class @LSystem
 			results = results.replace(@regexp,(match) ->
 				return rules[match]
 				)
-			alert(results)
 		return results
 
 class @LSystemDrawer
 	constructor: (@canvas, @options)->
 		if @options['origin'] == 'bottom-left'
 			@pos = {x:10.0, y:@canvas.height-10.0}
+		else if @options['origin'] == 'bottom-right'
+			@pos = {x:@canvas.width-10.0, y:@canvas.height-10.0}	
 		else if @options['origin'] == 'centre'
 			@pos = {x:@canvas.width/2.0, y:@canvas.height/2.0}
 
@@ -33,7 +34,7 @@ class @LSystemDrawer
 		ctx.moveTo(@pos.x,@pos.y)
 		for command in commands
 			switch command
-				when "F"
+				when "F","G"
 					this.moveForward()
 					ctx.lineTo(@pos.x,@pos.y)
 				when "-"

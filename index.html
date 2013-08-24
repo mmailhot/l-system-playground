@@ -19,7 +19,13 @@
 				<h2>L-System Playground</h2>
 				<div class="button-container">
 					<div class="dropdown dd-button" href="#">
-						<a class="btn btn-default">Load Example</a>
+						<a data-toggle="dropdown" class="btn btn-default">Load Example</a>
+						<ul class="dropdown-menu" role="menu" aria-labelledby="dLabel">
+							<li><a class="load-preset" data-preset="koch">Koch Curve</li>
+							<li><a class="load-preset" data-preset="dragon">Dragon Curve</li>
+							<li><a class="load-preset" data-preset="triangle">Sierpinski triangle</li>
+						 	<li><a class="load-preset" data-preset="plant">Fractal Plant</li>
+						</ul>
 					</div>
 					
 					<a class="btn btn-default" href="http://github.com/mmailhot/l-system-playground">Github</a>
@@ -37,6 +43,7 @@
 						<div class="form-group">
 						<label class="control-label" for="system-rules">Rules</label>
 						<textarea class="form-control" rows="5" name="system-rules" placeholder="F -> FF"></textarea>
+						<p class="help-block">Characters with special meaning - (F/G) Forward (-) Left (+) Right ([) Stack Push (]) Stack Pop</p>
 						</div>
 						
 						<div class="form-group">
@@ -73,6 +80,12 @@
 						  <label>
 						    <input type="radio" name="visual-origin" value="bottom-left" checked>
 						    Bottom Left
+						  </label>
+						</div>
+						<div class="radio">
+						  <label>
+						    <input type="radio" name="visual-origin" value="bottom-right">
+						    Bottom Right
 						  </label>
 						</div>
 						<div class="radio">

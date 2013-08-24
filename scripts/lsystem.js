@@ -19,7 +19,6 @@
         results = results.replace(this.regexp, function(match) {
           return rules[match];
         });
-        alert(results);
       }
       return results;
     };
@@ -35,6 +34,11 @@
       if (this.options['origin'] === 'bottom-left') {
         this.pos = {
           x: 10.0,
+          y: this.canvas.height - 10.0
+        };
+      } else if (this.options['origin'] === 'bottom-right') {
+        this.pos = {
+          x: this.canvas.width - 10.0,
           y: this.canvas.height - 10.0
         };
       } else if (this.options['origin'] === 'centre') {
@@ -56,6 +60,7 @@
         command = commands[_i];
         switch (command) {
           case "F":
+          case "G":
             this.moveForward();
             ctx.lineTo(this.pos.x, this.pos.y);
             break;

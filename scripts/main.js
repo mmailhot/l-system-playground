@@ -1,5 +1,64 @@
 (function() {
-  var generateSystem, resizeCanvas;
+  var generateSystem, loadPreset, presets, resizeCanvas;
+
+  presets = {
+    "plant": {
+      "system": {
+        "start": "X",
+        "rules": "X -> F-[[X]+X]+F[+FX]-X\nF -> FF",
+        "iterations": "7"
+      },
+      "visual": {
+        "length": "2",
+        "left": "25",
+        "right": "25",
+        "heading": "65",
+        "origin": "bottom-left"
+      }
+    },
+    "dragon": {
+      "system": {
+        "start": "FX",
+        "rules": "X -> X+YF\nY -> FX-Y",
+        "iterations": "16"
+      },
+      "visual": {
+        "length": "3",
+        "left": "90",
+        "right": "90",
+        "heading": "180",
+        "origin": "centre"
+      }
+    },
+    "triangle": {
+      "system": {
+        "start": "F",
+        "rules": "F -> G-F-G\nG -> F+G+F",
+        "iterations": "8"
+      },
+      "visual": {
+        "length": "2",
+        "left": "60",
+        "right": "60",
+        "heading": "180",
+        "origin": "bottom-right"
+      }
+    },
+    "koch": {
+      "system": {
+        "start": "F",
+        "rules": "F -> F+F-F-F+F",
+        "iterations": "4"
+      },
+      "visual": {
+        "length": "6",
+        "left": "90",
+        "right": "90",
+        "heading": "0",
+        "origin": "bottom-left"
+      }
+    }
+  };
 
   generateSystem = function(systemOptions, visualOptions) {
     var drawSystem, err, results, system;
@@ -27,6 +86,20 @@
     canvas = document.getElementById('main-canvas');
     canvas.width = window.innerWidth;
     return canvas.height = window.innerHeight;
+  };
+
+  loadPreset = function(name) {
+    var form, preset;
+    preset = presets[name];
+    form = $('#options');
+    form.find("[name='system-start']").val(preset["system"]["start"]);
+    form.find("[name='system-rules']").val(preset["system"]["rules"]);
+    form.find("[name='system-iterations']").val(preset["system"]["iterations"]);
+    form.find("[name='visual-length']").val(preset["visual"]["length"]);
+    form.find("[name='visual-left']").val(preset["visual"]["left"]);
+    form.find("[name='visual-right']").val(preset["visual"]["right"]);
+    form.find("[name='visual-start']").val(preset["visual"]["heading"]);
+    return form.find("[value='" + preset["visual"]["origin"] + "']").prop("checked", true);
   };
 
   $(document).ready(function() {
@@ -64,10 +137,13 @@
       visualOptions["length"] = parseInt($(this).find("[name='visual-length']").val()) || 20;
       visualOptions["left"] = parseInt($(this).find("[name='visual-left']").val()) || 45;
       visualOptions["right"] = parseInt($(this).find("[name='visual-right']").val()) || 45;
-      visualOptions["heading"] = parseInt($(this).find("[name='visual-start']").val()) || 20;
-      visualOptions["origin"] = $(this).find("[name='visual-origin']:checked").val() || 0;
+      visualOptions["heading"] = parseInt($(this).find("[name='visual-start']").val()) || 0;
+      visualOptions["origin"] = $(this).find("[name='visual-origin']:checked").val();
       console.log(visualOptions);
       return generateSystem(systemOptions, visualOptions);
+    });
+    $(".load-preset").click(function() {
+      return loadPreset($(this).attr('data-preset'));
     });
     return $(window).resize(function() {
       return resizeCanvas();
