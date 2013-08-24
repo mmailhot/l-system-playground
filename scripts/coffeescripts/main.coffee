@@ -1,6 +1,25 @@
-generateSystem = (systemOptions) ->
-	system = new LSystem(systemOptions["start"],systemOptions["rules"])
-	console.log(system.run(systemOptions["iterations"]))
+generateSystem = (systemOptions, visualOptions) ->
+	try
+		system = new LSystem(systemOptions["start"],systemOptions["rules"])
+		results = system.run(systemOptions["iterations"])
+	catch err
+		console.log("Error generating system " + err)
+		alert("System could not be generated (Check your rules + start)")
+		return
+
+	try
+		drawSystem = new LSystemDrawer(document.getElementById('main-canvas'),visualOptions)
+		drawSystem.draw(results)
+	catch err
+		console.log("Error drawing system " + err)
+		alert("System could not be drawn (likely pulled more off the stack than it put on")
+		return
+	
+
+resizeCanvas = () ->
+	canvas = document.getElementById('main-canvas')
+	canvas.width = window.innerWidth
+	canvas.height = window.innerHeight
 
 $(document).ready(()->
 	$("#options").submit((e)->
@@ -36,13 +55,23 @@ $(document).ready(()->
 
 		visualOptions = {}
 		# Get the visual options
-		visualOptions["length"] = $(this).find("[name='visual-length']").val() || 20
-		visualOptions["left"] = $(this).find("[name='visual-left']").val() || 45
-		visualOptions["right"] = $(this).find("[name='visual-right']").val() || 45
-		visualOptions["heading"] = $(this).find("[name='visual-start']").val() || 20
-		
+		visualOptions["length"] = parseInt($(this).find("[name='visual-length']").val()) || 20
+		visualOptions["left"] = parseInt($(this).find("[name='visual-left']").val()) || 45
+		visualOptions["right"] = parseInt($(this).find("[name='visual-right']").val()) || 45
+		visualOptions["heading"] = parseInt($(this).find("[name='visual-start']").val()) || 20
+		visualOptions["origin"] = $(this).find("[name='visual-origin']:checked").val() || 0
+
+		console.log(visualOptions)
+
 		generateSystem(systemOptions,visualOptions)
 
 	)
+
+	$(window).resize(()->
+		resizeCanvas()
+	)
 )
 
+$(window).load(()->
+	resizeCanvas()
+)
